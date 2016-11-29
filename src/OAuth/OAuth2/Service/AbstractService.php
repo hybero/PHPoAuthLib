@@ -194,6 +194,28 @@ abstract class AbstractService extends BaseAbstractService implements ServiceInt
     }
 
     /**
+     * Stores token from outside of the class to the storage
+     *
+     * @return boolean
+     */
+    public function storeToken(TokenInterface $token)
+    {
+        $this->storage->storeAccessToken($this->service(), $token);
+
+        return true;
+    }
+
+    /**
+     * Return access token from storage
+     *
+     * @return TokenInterface
+     */
+    public function getToken()
+    {
+        return $this->storage->retrieveAccessToken();
+    }
+
+    /**
      * Refreshes an OAuth2 access token.
      *
      * @param TokenInterface $token
